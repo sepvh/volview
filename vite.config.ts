@@ -3,8 +3,11 @@ import * as path from 'node:path';
 import * as fs from 'node:fs';
 import { execSync } from 'node:child_process';
 import { createRequire } from 'node:module';
+// @ts-ignore
 import { Plugin, defineConfig, normalizePath } from 'vite';
+// @ts-ignore
 import vue from '@vitejs/plugin-vue';
+// @ts-ignore
 import vuetify, { transformAssetUrls } from 'vite-plugin-vuetify';
 import { createHtmlPlugin } from 'vite-plugin-html';
 import { viteStaticCopy } from 'vite-plugin-static-copy';
@@ -15,6 +18,7 @@ import replace from '@rollup/plugin-replace';
 import { config } from './wdio.shared.conf';
 
 function resolveNodeModulePath(moduleName: string) {
+  // @ts-ignore
   const require = createRequire(import.meta.url);
   let modulePath = normalizePath(require.resolve(moduleName));
   while (!modulePath.endsWith(moduleName)) {
@@ -224,6 +228,10 @@ export default defineConfig({
   server: {
     // so `npm run test:e2e:dev` can access the webdriver static server temp directory
     proxy: {
+      '/dicom-web': {
+        target: 'http://localhost:8042',
+        changeOrigin: true,
+      },
       '/tmp': config.baseUrl!,
     },
   },
