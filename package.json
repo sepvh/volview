@@ -9,7 +9,7 @@
     "src"
   ],
   "scripts": {
-    "dev": "cross-env VITE_SHOW_SAMPLE_DATA=true vite",
+    "dev": "cross-env VITE_SHOW_SAMPLE_DATA=true vite --port 8911",
     "preview": "vite preview",
     "serve": "npm run dev",
     "prebuild": "patch-package",
