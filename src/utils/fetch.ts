@@ -33,6 +33,7 @@ export const $fetch: typeof fetch = (
 ): Promise<Response> => {
   return fetch(input, {
     ...init,
+    credentials: 'include',
     headers: mergeHeaders(globalHeaders, init?.headers),
   });
 };

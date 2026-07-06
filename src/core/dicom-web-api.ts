@@ -71,6 +71,12 @@ function makeClient(dicomWebRoot: string) {
   return new api.DICOMwebClient({
     url: dicomWebRoot,
     headers,
+    requestHooks: [
+      (request: XMLHttpRequest) => {
+        request.withCredentials = true;
+        return request;
+      },
+    ],
   });
 }
 
