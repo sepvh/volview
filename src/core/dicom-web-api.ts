@@ -72,7 +72,10 @@ function makeClient(dicomWebRoot: string) {
     url: dicomWebRoot,
     headers,
     requestHooks: [
-      (request: XMLHttpRequest) => {
+      // The library requires this hook to declare exactly 2 parameters
+      // (request, metadata), even though only `request` is used here.
+      (request: XMLHttpRequest, metadata: unknown) => {
+        void metadata;
         request.withCredentials = true;
         return request;
       },
